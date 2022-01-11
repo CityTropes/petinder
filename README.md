@@ -1,4 +1,6 @@
-# Petinder
+# Petinder: connecting species
+
+Angular tutorial: Petinder, tinder for pets.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
 
