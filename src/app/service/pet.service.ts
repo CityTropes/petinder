@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
+import {Pet} from "../model/Pet";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PetService {
 
-  private _responseUrl : string;
+  private _responseUrl: string;
 
 
   constructor(private http: HttpClient) {
@@ -21,12 +22,17 @@ export class PetService {
   }
 
 
-  getPets(): Observable<any> {
-    return this.http.get(this._responseUrl);
+  getPets(): Observable<Pet[]> {
+
+    return this.http.get<Pet[]>(this._responseUrl)
+      .pipe(
+        map((pets: Pet[]) => pets.sort((a: Pet, b: Pet) => a.name.localeCompare(b.name)))
+      );
+  }
+
+  findPetByName(name: string): Observable<any> {
+    return this.http.get<Pet>(`${this._responseUrl}/${name}`);
   }
 
 
-  // get pet$(): Pet {                            when to use what getter?
-  //   return this._pet$.asObservable();
-  // }
 }

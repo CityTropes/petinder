@@ -9,10 +9,13 @@ import {Pet} from "../model/Pet";
 })
 export class ProfileGalleryComponent implements OnInit {
 
-  public petArray : Array<Pet> = new Array<Pet>();
+  public petArray: Array<Pet> = new Array<Pet>();
+  // public selectedPet: Pet  | any;                   //why not optional?
+  selectedPet?: Pet;
+  searchText: any;
 
   constructor(private petService: PetService) {
-
+    this.searchText = "";
   }
 
   ngOnInit(): void {
@@ -21,7 +24,19 @@ export class ProfileGalleryComponent implements OnInit {
 
   getPets(): void {
     this.petService.getPets().subscribe(pets => this.petArray = pets);
-    //close or unsubscibe?
+    //unsubscibe? -> no, angular takes care of this
   }
+
+  selectPet(selectPet: Pet): void {
+    this.selectedPet = selectPet;
+  }
+
+  // getSelectedPet(){
+  //   return this.selectedPet;
+  // }
+  //
+  // onFilterPetsByName(event: Event){   //how/where to use
+  //   this.searchText = (<HTMLInputElement>event.target).value;
+  // }
 
 }

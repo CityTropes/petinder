@@ -5,20 +5,29 @@ import { AppComponent } from './app.component';
 import {LayoutModule} from "./layout/layout.module";
 import { ProfileGalleryComponent } from './profile-gallery/profile-gallery.component';
 import {HttpClientModule} from "@angular/common/http";
+import { NameFilterPipe } from './pipes/name-filter.pipe';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileGalleryComponent
+    ProfileGalleryComponent,
+    NameFilterPipe
   ],
+
   imports: [
     BrowserModule,            //need this in your top level module
-    AppRoutingModule,         //use the right one------------??
+    AppRoutingModule,         //use your own made
     LayoutModule,
-    HttpClientModule
-
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
+
   providers: [],
+
   bootstrap: [AppComponent]
 })
 
